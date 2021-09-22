@@ -1,0 +1,61 @@
+body
+{
+    padding: 10px;
+}
+
+@media print{
+
+	body{
+		font-family: arial;
+		line-height: 1.1;
+		padding: 0px;
+		margin: 0px;
+	}
+
+	p{
+		margin: 0px;
+		padding: 0px 0px 10px 0px;
+	}
+
+	th, td{
+		padding: 2px;
+		border: 2px solid gray;
+		text-align: center;
+	}
+
+	th:first-child,
+	td:first-child {
+	  padding-left: 2px; }
+	th:last-child,
+	td:last-child {
+	  padding-right: 2px; }
+
+    .hide-me
+    {
+        display: none !important;
+    }
+
+    .print-only{
+    	color: black;
+    }
+}
+
+.align-center
+{
+    text-align: center;
+}
+
+.inputError{
+	color: red;
+	font-weight: bold;
+	background-color: yellow;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid red;
+}
+
+.print-only{
+	color: white;
+	font-size: 80%;
+	padding-top: 63px;
+}
