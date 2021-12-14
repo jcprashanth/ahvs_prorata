@@ -1,4 +1,6 @@
-
+	<div class="row align-center" style="opacity: 0.5;">
+		<br /><br /><br /><hr /><?php echo $pageTitle; ?>
+	</div>
   </div>
 
 	<script src="js/jquery-1.12.4.js"></script>

@@ -54,6 +54,11 @@ function convertNumberToWord($num = false)
 
 $FeedType = $_POST['FeedType'];
 
+// Setting unit conversion standards for Protein and Fat
+$ProteinUnitStandard = 1; // 1% Protein = 1 Unit
+$FatUnitStandard = 2.5; // 1% Fat = 2.5 Units
+
+
 // Setting Standard values for feed types
 if($FeedType == "PF-01 Broiler Starter Feed"){
 	$smoisture = "11";
@@ -270,7 +275,7 @@ if($process == "yes"){
 					<td><?php $dash = round($lash - $sash,2); if($dash <= 0){$dash = 0;} echo $dash; ?></td>
 				</tr>
 				<tr>
-					<td colspan="4">Total Difference</td>
+					<td colspan="4" style="text-align: right;">Total Difference</td>
 					<td><?php $tdiff1 = round($dmoisture + $dfibre + $dash, 2); echo $tdiff1; ?></td>
 				</tr>
 			</table>
@@ -295,7 +300,7 @@ if($process == "yes"){
 		<br />
 		<strong>B. Calculating Actual Cost</strong>
 		<br />
-		Converstion: 1% Crude Protein = 1 Unit &amp; 0.25% Crude Fat = 1 Unit.
+		Converstion: <?php echo round(1/$ProteinUnitStandard,2); ?>% Crude Protein = 1 Unit &amp; <?php echo round(1/$FatUnitStandard,2); ?>% Crude Fat = 1 Unit.
 		<div style="overflow-x:auto;">
 			<table>
 				<tr>
@@ -309,23 +314,23 @@ if($process == "yes"){
 				<tr>
 					<td>1</td>
 					<td>Crude Protein</td>
-					<td><?php echo $sprotein; ?></td>
+					<td><?php $sprotein = round($sprotein*$ProteinUnitStandard,2); echo $sprotein; ?></td>
 					<td><?php echo $lprotein; ?></td>
-					<td><?php echo $lprotein; ?></td>
-					<td><?php $cprotein = $sprotein; if($lprotein < $sprotein){$cprotein = $lprotein;} echo $cprotein; ?></td>
+					<td><?php $proteinu = round($lprotein*$ProteinUnitStandard,2); echo $proteinu; ?></td>
+					<td><?php $cprotein = $sprotein; if($proteinu < $sprotein){$cprotein = $proteinu;} echo $cprotein; ?></td>
 				</tr>
 				<tr>
 					<td>2</td>
 					<td>Crude Fat</td>
-					<td><?php $sfat = round($sfat*4,2); echo $sfat; ?></td>
+					<td><?php $sfat = round($sfat*$FatUnitStandard,2); echo $sfat; ?></td>
 					<td><?php echo $lfat; ?></td>
-					<td><?php $fatu = round($lfat*4,2); echo $fatu; ?></td>
+					<td><?php $fatu = round($lfat*$FatUnitStandard,2); echo $fatu; ?></td>
 					<td><?php $cfat = $sfat; if($fatu < $sfat){$cfat = $fatu;} echo $cfat; ?></td>
 				</tr>
 				<tr>
-					<td colspan="2">Total</td>
+					<td colspan="2" style="text-align: right;">Total</td>
 					<td><?php $tsu = round($sprotein + $sfat, 2); echo $tsu; ?></td>
-					<td colspan="2">Total</td>
+					<td colspan="2" style="text-align: right;">Total</td>
 					<td><?php $tlu = round($cprotein + $cfat, 2); echo $tlu; ?></td>
 				</tr>
 			</table>
@@ -339,11 +344,20 @@ if($process == "yes"){
 
 		Cost per Tonne = ( <?php echo $tlu; ?> x <?php echo $CostPerTonne; ?> ) / <?php echo $tsu; ?>  = <strong>Rs. <?php echo $calcCost = round(($tlu*$CostPerTonne)/$tsu,2); ?></strong>
 		<br />
-		Payable Amount = ( <?php echo $actualWeight; ?> x <?php echo $calcCost; ?> ) / 1000 = <strong>Rs. <?php echo $payAmount = round(($calcCost*$actualWeight)/1000,0); ?></strong>
+		Actual Cost = ( <?php echo $actualWeight; ?> x <?php echo $calcCost; ?> ) / 1000 = <strong>Rs. <?php echo $payAmount = round(($calcCost*$actualWeight)/1000,0); ?></strong>
+
+	</div>
+</div>
+
+<div class="row">
+	<div class="twelve columns">
+		
 		<br />
-		Difference Amount = ( Bill Amount - Payable Amount )
+		<strong>C. Calculating Prorata Deduction</strong>
 		<br />
-		Difference Amount = <?php echo $BillAmount; ?> - <?php echo $payAmount; ?> = <strong>Rs. <?php echo $diffAmount = $BillAmount-$payAmount; ?></strong>
+		Prorata Deduction = ( Bill Amount - Actual Cost )
+		<br />
+		Prorata Deduction = <?php echo $BillAmount; ?> - <?php echo $payAmount; ?> = <strong>Rs. <?php echo $diffAmount = $BillAmount-$payAmount; ?></strong>
 
 	</div>
 </div>
@@ -352,7 +366,7 @@ if($process == "yes"){
 	<div class="twelve columns">
 
 		<br />
-		<strong>C. Calculating Total Deduction</strong>
+		<strong>D. Calculating Total Deduction</strong>
 		<div style="overflow-x:auto;">
 			<table>
 				<tr>
@@ -394,7 +408,7 @@ if($process == "yes"){
 
 <div class="row">
 	<div class="twelve columns print-only">		
-		[ Generated at <?php echo $url; ?> ]
+		[ Generated online from <?php echo $url; ?> ]
 	</div>
 </div>
 
@@ -526,10 +540,6 @@ if($process == "yes"){
 	    	</div>
 	  	</div>
 	</form>
-
-	<div class="row align-center">
-		<br /><br /><br /><hr /><?php echo $pageTitle; ?>
-	</div>
 
 <?php } ?>
 

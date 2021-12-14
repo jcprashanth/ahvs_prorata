@@ -28,8 +28,8 @@
 			</select>
 		    </div>
 
-		    <div class="align-center twelve columns" style="color: #cacaca;">
-		  		<p>By continuing, I the user, agree to use this utility <u>at my own risk</u>.</p>
+		    <div class="align-center twelve columns" style="color: red; opacity: 0.4;">
+		  		<p>By continuing, I the user, agree to use this utility <u><strong>at my own risk</strong></u>.</p>
 		  	</div>
 	  	
 		  	<div class="align-center twelve columns">
@@ -37,9 +37,5 @@
 		  	</div>
 		</div>
 	</form>
-
-	<div class="row align-center">
-		<br /><br /><br /><hr /><?php echo $pageTitle; ?>
-	</div>
 
 <?php require_once('includes/bottom.php'); ?>
