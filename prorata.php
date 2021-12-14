@@ -408,7 +408,7 @@ if($process == "yes"){
 
 <div class="row">
 	<div class="twelve columns print-only">		
-		[ Generated online from <?php echo $url; ?> ]
+		[ Generated from <?php echo $url; ?> (<?php echo $appVersion; ?>) on <?php echo date("j-M-Y"); ?> at <?php echo date("G:i:s T"); ?> ]
 	</div>
 </div>
 
