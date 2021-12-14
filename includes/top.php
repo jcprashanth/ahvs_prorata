@@ -9,7 +9,7 @@ $appStatus = 1; // Comment this line if want to disable the App
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title><?php echo $pageTitle = "Prorata Calculation Online Utility (v-5.2) by Prashanth, C."; ?></title>
+  <title><?php echo $pageTitle = "Prorata Calculation Online Utility (v-5.2b) by Prashanth, C."; ?></title>
   <meta name="description" content="Prorata Calculation">
   <meta name="author" content="Prashanth">
   

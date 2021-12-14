@@ -1,4 +1,4 @@
-	<div class="row align-center" style="opacity: 0.5;">
+	<div class="row align-center hide-me" style="opacity: 0.5;">
 		<br /><br /><br /><hr /><?php echo $pageTitle; ?>
 	</div>
   </div>
